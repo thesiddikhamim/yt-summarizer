@@ -1,12 +1,12 @@
 ---
 name: summarize
-description: Summarize any content (YouTube video, article, podcast, lecture, etc.) by providing a timestamped transcription. Produces a rich Obsidian note with section-by-section breakdowns, wikilinks to all technical concepts and people, and reference notes for every linked term.
+description: Summarize any content (YouTube video, article, podcast, lecture, etc.) by providing a YouTube URL or a timestamped transcription. Produces a rich Obsidian note with section-by-section breakdowns, wikilinks to all technical concepts and people, and reference notes for every linked term.
 user_invocable: true
 ---
 
 # Summarize
 
-Universal content summarizer. Takes a timestamped transcription — from YouTube, podcast, lecture, or any spoken-word content — and produces a rich, interlinked Obsidian summary note with reference notes for every concept mentioned.
+Universal content summarizer. Takes a YouTube URL or a timestamped transcription — from YouTube, podcast, lecture, or any spoken-word content — and produces a rich, interlinked Obsidian summary note with reference notes for every concept mentioned.
 
 ## Requirements
 
@@ -45,11 +45,11 @@ All paths below are relative to `$VAULT_ROOT`.
 
 ## Trigger
 
-When the user provides a transcription to summarize (via pasting text or providing a `.txt`, `.srt`, or `.vtt` file).
+When the user provides a YouTube URL or a transcription to summarize (via pasting text or providing a `.txt`, `.srt`, or `.vtt` file).
 
 ## Inputs
 
-- **Source**: Transcription text (pasted or from a `.txt`, `.srt`, or `.vtt` file)
+- **Source**: YouTube URL, or transcription text (pasted or from a `.txt`, `.srt`, or `.vtt` file)
 - **Metadata**: Title, Channel/Author, Source URL (if available)
 - **Audience** (optional): defaults to "general reader." User may specify (e.g. "high school student", "expert", "5-year-old")
 - **Depth** (optional): defaults to "full." User may request "tldr only", "section-by-section", or "deep dive"
