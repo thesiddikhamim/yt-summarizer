@@ -4,7 +4,7 @@ A collection of skills I use with Claude Code to improve my life in various ways
 
 ## Skills
 
-- [`summarize/`](./summarize) — provide a timestamped transcription (YouTube, podcast, lecture) and it writes a summary note into your vault with wikilinks to every person and concept mentioned. Asks detailed vs minimal mode on each run — detailed creates reference notes for every wikilink, minimal leaves them dangling and saves ~85% tokens.
+- [`yt-summarize/`](./yt-summarize) — provide a YouTube URL or a timestamped transcription (podcast, lecture, etc.) and it writes a summary note into your vault with wikilinks to every person and concept mentioned. Asks detailed vs minimal mode on each run — detailed creates reference notes for every wikilink, minimal leaves them dangling and saves ~85% tokens.
 
 (more coming) (daily brief, daily news)
 
@@ -18,10 +18,10 @@ Claude will:
 1. Clone the repo
 2. Ask where to put the vault (default: `~/ai-vault`)
 3. Create the vault folder with the expected structure (see below)
-4. Symlink `summarize` into `~/.claude/skills/`
+4. Symlink `yt-summarize` into `~/.claude/skills/`
 5. Copy the person-note template into your vault's `_Templates/` folder
 
-Restart Claude Code so it picks up the new skills. Then run `/summarize`.
+Restart Claude Code so it picks up the new skills. Then run `/yt-summarize`.
 
 > **Recommended: use a new, dedicated Obsidian vault** for these skills rather than your existing personal vault. The skills create and modify many notes/folders automatically, and keeping it separate avoids polluting notes you've written yourself.
 
@@ -36,28 +36,28 @@ If you just want one skill and already have a vault:
 ```bash
 mkdir -p ~/src
 git clone https://github.com/thesiddikhamim/yt-summarizer ~/src/yt-summarizer
-ln -s ~/src/yt-summarizer/summarize ~/.claude/skills/summarize
+ln -s ~/src/yt-summarizer/yt-summarize ~/.claude/skills/yt-summarize
 ```
 
 The skills share a `templates/` folder at the repo root — leave it where it is, both skills reference it with a relative path.
 
 ## Usage
 
-### Summarize a transcription
+### YT-Summarize a transcription
 
 You can provide the transcription by pasting the text directly or by providing a path to a transcription file (`.txt`, `.srt`, or `.vtt`).
 
 ```
-/summarize <paste transcription text here>
-/summarize path/to/transcript.srt
+/yt-summarize <paste transcription text here>
+/yt-summarize path/to/transcript.srt
 ```
 
 Summary length is proportional to the input length — a short transcription gets a short summary, a multi-hour talk gets a long one. Quotes and metadata go in the frontmatter.
 
 
 ```
-/summarize "<transcription text>" minimal
-/summarize "<transcription text>" detailed
+/yt-summarize "<transcription text>" minimal
+/yt-summarize "<transcription text>" detailed
 ```
 
 Accepted tokens:
@@ -93,7 +93,7 @@ Otherwise the skills walk up from your current directory looking for `.obsidian/
 
 ## Requirements
 
-- `summarize` no longer requires external CLI tools as it accepts transcriptions directly (text or `.txt`/`.srt`/`.vtt` files).
+- `yt-summarize` no longer requires external CLI tools as it accepts transcriptions directly (text or `.txt`/`.srt`/`.vtt` files).
 
 The skill checks for vault folder structure on first run and asks before creating anything.
 
