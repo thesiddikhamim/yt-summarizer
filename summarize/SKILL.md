@@ -24,7 +24,8 @@ Universal content summarizer. Takes a timestamped transcription — from YouTube
 
 | Tool | Purpose | Install |
 |---|---|---|
-| (None) | Transcription is provided by the user | N/A |
+| `youtube-transcript-api` | Fetch YouTube transcriptions | `pip install youtube-transcript-api` |
+| `python3` | Run the transcription script | N/A (Pre-installed on macOS) |
 
 
 ## Configuration
@@ -90,9 +91,15 @@ done
 
 For each missing folder, ask the user: **"Create `<folder>` in your vault? [y/N]"** — if yes, `mkdir -p "$VAULT_ROOT/<folder>"`.
 
-### 0c. (Retired) Check required CLI tools
+### 0c. Check required CLI tools
 
-This step is no longer needed as the skill now accepts transcriptions directly.
+```bash
+if ! python3 -c "import youtube_transcript_api" 2>/dev/null; then
+  echo "MISSING: youtube-transcript-api"
+fi
+```
+
+If missing, ask the user: **"Install `youtube-transcript-api` via pip? [y/N]"** — if yes, `pip3 install youtube-transcript-api`.
 
 ### 0d. Install the person template if missing
 
@@ -161,16 +168,20 @@ For book chapter-by-chapter depth (Step 1 book section), detailed mode gets the 
 
 ## Step 1: Accept transcription and metadata
 
-Accept the transcription from the user. This can be provided in three ways:
-1. **Direct Paste**: The user pastes the full transcription text into the chat.
-2. **File Path**: The user provides a path to a `.txt`, `.srt`, or `.vtt` file.
-3. **Environment Variable**: For automated runs, the transcription might be passed via an environment variable or piping.
+Accept the transcription or a YouTube URL from the user. This can be provided in four ways:
+1. **YouTube URL**: The user provides a link starting with `https://youtube.com` or `https://youtu.be`.
+2. **Direct Paste**: The user pastes the full transcription text into the chat.
+3. **File Path**: The user provides a path to a `.txt`, `.srt`, or `.vtt` file.
+4. **Environment Variable**: For automated runs, the transcription might be passed via an environment variable or piping.
 
-If the user provides a file path, read the file content immediately. For `.srt` and `.vtt` files, maintain the timestamps as they are essential for the structured summary and referencing.
+If a **YouTube URL** is provided:
+1. Run the transcription script: `python3 transcription.py "<url>"` (script located in the repo root).
+2. Use the output as the transcription text.
+3. If an error occurs (e.g., "Error: ..."), inform the user and ask for the transcription manually.
 
-Also gather metadata (title, author/channel, source URL) from the user. If metadata is missing, ask the user to provide it to ensure the resulting vault note is properly named and linked.
+If the user provides a **file path**, read the file content immediately. For `.srt` and `.vtt` files, maintain the timestamps as they are essential for the structured summary and referencing.
 
-If the user provides a URL instead of a transcription, politely remind them that they need to provide the transcription text or a transcription file directly.
+Also gather metadata (title, author/channel, source URL) from the user. If metadata is missing, ask the user to provide it to ensure the resulting vault note is properly named and linked. For YouTube URLs, the script provides the text, but the user may still need to confirm the title and channel name if they want specific folder nesting.
 
 
 ## Step 1b: Save transcript
