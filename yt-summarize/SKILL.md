@@ -194,30 +194,13 @@ Save the provided transcription as a permanent vault note.
 ```markdown
 ---
 date: YYYY-MM-DD
-recording: "<source URL>"
-meeting: "[[<Summary Note Title>]]"
-unread: true
----
-
-[Full timestamped transcript text, one line per segment]
-```
-
-**Link from summary:** Add `transcript: "[[<Title> Transcript]]"` to the summary note's frontmatter.
-
-
-**Location:** Same folder as the summary note, with ` Transcript` appended to the filename.
-
-**Format:**
-```markdown
----
-date: YYYY-MM-DD
 duration: <seconds>
 recording: "<source URL>"
 meeting: "[[<Summary Note Title>]]"
 unread: true
 ---
 
-[Full timestamped transcript text, one line per segment]
+[Body Content: use the full formatted output from transcription.py for YouTube URLs, preserving all timestamp links]
 ```
 
 **Link from summary:** Add `transcript: "[[<Title> Transcript]]"` to the summary note's frontmatter.
